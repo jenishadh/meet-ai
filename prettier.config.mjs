@@ -35,7 +35,7 @@ const config = {
     "^@/components/(.*)$",
     // App-specific modules
     "^@/app/(.*)$",
-    "^@/features/(.*)$",    
+    "^@/modules/(.*)$",    
 
     "",
 

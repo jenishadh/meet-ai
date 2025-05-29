@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { LoaderCircle, OctagonAlert } from "lucide-react"
 import { useForm } from "react-hook-form"
@@ -31,7 +31,6 @@ const formSchema = z.object({
 })
 
 export function SignInView() {
-  const router = useRouter()
   const [error, setError] = useState<string | null>(null)
   const [pending, setPending] = useState(false)
 
@@ -50,11 +49,31 @@ export function SignInView() {
       {
         email: data.email,
         password: data.password,
+        callbackURL: "/",
       },
       {
         onSuccess: () => {
           setPending(false)
-          router.push("/")
+        },
+        onError: ({ error }) => {
+          setPending(false)
+          setError(error.message)
+        },
+      }
+    )
+  }
+
+  async function onSocial(provider: "google" | "github") {
+    setError(null)
+    setPending(true)
+    await authClient.signIn.social(
+      {
+        provider: provider,
+        callbackURL: "/",
+      },
+      {
+        onSuccess: () => {
+          setPending(false)
         },
         onError: ({ error }) => {
           setPending(false)
@@ -137,6 +156,7 @@ export function SignInView() {
                     variant="outline"
                     className="w-full"
                     disabled={pending}
+                    onClick={() => onSocial("google")}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -170,6 +190,7 @@ export function SignInView() {
                     variant="outline"
                     className="w-full"
                     disabled={pending}
+                    onClick={() => onSocial("github")}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +216,7 @@ export function SignInView() {
             </form>
           </Form>
           <div className="relative hidden flex-col items-center justify-center gap-y-4 bg-radial from-green-700 to-green-900 md:flex">
-            <img src="/logo.svg" alt="Logo" className="h-[92px] w-[92px]" />
+            <Image src="/logo.svg" alt="Logo" className="h-[92px] w-[92px]" />
             <p className="text-2xl font-semibold text-white">Meet.AI</p>
           </div>
         </CardContent>
