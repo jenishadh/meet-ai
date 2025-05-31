@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { LoaderCircle, OctagonAlert } from "lucide-react"
@@ -265,7 +264,7 @@ export function SignUpView() {
             </form>
           </Form>
           <div className="relative hidden flex-col items-center justify-center gap-y-4 bg-radial from-green-700 to-green-900 md:flex">
-            <Image src="/logo.svg" alt="Logo" className="h-[92px] w-[92px]" />
+            <img src="/logo.svg" alt="Logo" className="h-[92px] w-[92px]" />
             <p className="text-2xl font-semibold text-white">Meet.AI</p>
           </div>
         </CardContent>
