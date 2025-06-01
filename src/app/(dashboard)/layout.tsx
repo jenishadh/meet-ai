@@ -1,5 +1,6 @@
 import { SidebarProvider } from "@/components/ui/sidebar"
-import DashboardSidebar from "@/modules/dashboard/ui/components/dashboard-sidebar"
+import { DashboardNavbar } from "@/modules/dashboard/ui/components/dashboard-navbar"
+import { DashboardSidebar } from "@/modules/dashboard/ui/components/dashboard-sidebar"
 
 export default function DashboardLayout({
   children,
@@ -10,6 +11,7 @@ export default function DashboardLayout({
     <SidebarProvider>
       <DashboardSidebar />
       <main className="bg-muted flex min-h-svh w-screen flex-col">
+        <DashboardNavbar />
         {children}
       </main>
     </SidebarProvider>

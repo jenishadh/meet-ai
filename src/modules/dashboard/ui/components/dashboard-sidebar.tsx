@@ -43,7 +43,7 @@ const secondSection = [
   },
 ]
 
-export default function DashboardSidebar() {
+export function DashboardSidebar() {
   const pathname = usePathname()
   return (
     <Sidebar>
